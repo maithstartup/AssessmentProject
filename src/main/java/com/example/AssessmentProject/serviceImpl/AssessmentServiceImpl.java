@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class AssessmentServiceImpl implements AssessmentService {
@@ -30,6 +31,17 @@ public class AssessmentServiceImpl implements AssessmentService {
         {
             return "unable to add";
         }
+
+    }
+    public Assessment getAssessmentById(Integer assessmentId){
+
+        Optional<Assessment> assessmentOptional = assessmentRepository.findById(assessmentId);
+
+        if(assessmentOptional.isPresent())
+        {
+            return assessmentOptional.get();
+        }
+        return null;
 
     }
 }

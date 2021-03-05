@@ -7,5 +7,7 @@ public interface AssessmentService {
 
    public String addAssessment(Assessment assessment);
 
+   public Assessment getAssessmentById(Integer assessmentId);
+
 
 }
