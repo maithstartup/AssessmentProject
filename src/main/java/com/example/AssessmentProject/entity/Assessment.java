@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,6 +31,10 @@ public class Assessment {
     private Date lastUpdate;
 
     int trainerId;
+
+    @OneToMany(cascade = CascadeType.REMOVE , fetch = FetchType.LAZY)
+    @JoinColumn(name = "assessmentId")
+    Set<Quiz> quizzes;
 
     public Assessment(String assessmentName, String type, float score, String description, int courseId, int trainerId) {
         this.assessmentName = assessmentName;

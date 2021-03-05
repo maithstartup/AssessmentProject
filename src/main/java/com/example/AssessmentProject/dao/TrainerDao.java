@@ -1,10 +1,15 @@
 package com.example.AssessmentProject.dao;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class TrainerDao {
 
 
-        int trainerId;
+        Integer trainerId;
 
         String trainerName;
 

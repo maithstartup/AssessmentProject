@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface AssessmentService {
 
-    String addAssessment(Assessment assessment);
+   public String addAssessment(Assessment assessment);
 
 
 }
