@@ -21,7 +21,8 @@ public class Course {
 
     Integer trainerId;
 
-    @OneToMany(mappedBy = "courseId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "courseId")
     private Set<Assessment> assessments;
 
 

@@ -20,6 +20,7 @@ public class Trainer {
 
     String trainerPassword;
 
-    @OneToMany(mappedBy = "trainerId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name="trainerId")
     private Set<Assessment> assessments;
 }
