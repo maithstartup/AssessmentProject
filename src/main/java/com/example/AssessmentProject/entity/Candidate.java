@@ -52,25 +52,7 @@ public class Candidate {
     public int hashCode() {
         return Objects.hash(candidateName);
     }
-
-//    public void addAssessment(Assessment assessment) {
-//        CandidateAssessment candidateAssessment = new CandidateAssessment(this, assessment);
-//        assessments.add(candidateAssessment);
-//    }
-//
-//    public void removeAssessment(Assessment assessment) {
-//        for (Iterator<CandidateAssessment> iterator = assessments.iterator();
-//             iterator.hasNext(); ) {
-//            CandidateAssessment candidateAssessment = iterator.next();
-//
-//            if (candidateAssessment.getCandidate().equals(this) &&
-//                    candidateAssessment.getAssessment().equals(assessment)) {
-//                iterator.remove();
-//                candidateAssessment.setCandidate(null);
-//                candidateAssessment.setAssessment(null);
-//            }
-//        }
-//    }
+    
 
     public Candidate(Integer candidateId, String candidateName, String location, String candidateEmail, Integer batch) {
         this.candidateId = candidateId;

@@ -23,6 +23,7 @@ public class AssignmentServiceImpl implements AssignmentService {
         if(assessment != null && assessment.getType().equals("assignment")){
 
             assignmentRepository.save(assignment);
+            assessmentService.getScoreByAssessmentId(assessmentId);
             return "assignment added";
         }
         return "unable to add assignment";

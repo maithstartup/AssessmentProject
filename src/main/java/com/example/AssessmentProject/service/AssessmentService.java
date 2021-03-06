@@ -18,5 +18,7 @@ public interface AssessmentService {
 
    public String deleteAssessmentById(Integer assessmentId);
 
+   public Float getScoreByAssessmentId(Integer assessmentId);
+
 
 }

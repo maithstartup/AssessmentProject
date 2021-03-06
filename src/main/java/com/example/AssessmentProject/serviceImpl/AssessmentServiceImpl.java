@@ -86,5 +86,27 @@ public class AssessmentServiceImpl implements AssessmentService {
         return null;
     }
 
+    public Float getScoreByAssessmentId(Integer assessmentId){
+
+
+        Assessment assessment = getAssessmentById(assessmentId);
+        Float totalScore= Float.valueOf(0);
+        if(assessment != null)
+        {
+            if(assessment.getType().equals("quiz"))
+            {
+                totalScore = assessmentRepository.getQuizTotal(assessmentId);
+            }
+            else if(assessment.getType().equals("assignment"))
+            {
+                totalScore = assessmentRepository.getAssignmentTotal(assessmentId);
+            }
+
+        }
+        assessment.setScore(totalScore);
+        assessmentRepository.save(assessment);
+        return totalScore;
+    }
+
 
 }

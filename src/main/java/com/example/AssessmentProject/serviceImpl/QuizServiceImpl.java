@@ -28,7 +28,9 @@ public class QuizServiceImpl implements QuizService {
         Assessment assessment = assessmentService.getAssessmentById(assessmentId);
         if(assessment != null && assessment.getType().equals("quiz")){
 
+
             quizRepository.save(quiz);
+            Float score = assessmentService.getScoreByAssessmentId(assessmentId);
             return "quiz added";
         }
         return "unable to add quiz";
@@ -77,6 +79,7 @@ public class QuizServiceImpl implements QuizService {
             quiz1.setQuizScore(quiz.getQuizScore());
 
             quizRepository.save(quiz1);
+            Float score = assessmentService.getScoreByAssessmentId(quiz.getAssessmentId());
             return quiz1;
 
         }
@@ -89,6 +92,7 @@ public class QuizServiceImpl implements QuizService {
         if(quizOptional.isPresent())
         {
             quizRepository.deleteById(quizId);
+            Float score = assessmentService.getScoreByAssessmentId(quizOptional.get().getAssessmentId());
             return "quiz deleted";
         }
         return null;
