@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -49,5 +50,21 @@ public class Assessment {
         this.description = description;
         this.courseId = courseId;
         this.trainerId = trainerId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Assessment assessment = (Assessment) o;
+        return Objects.equals(assessmentName, assessment.assessmentName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(assessmentName);
     }
 }

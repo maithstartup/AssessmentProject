@@ -1,22 +1,16 @@
 package com.example.AssessmentProject.dao;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CandidateDao {
+public class CandidateAssessmentDoa {
 
     Integer candidateId;
 
-    String candidateName;
+    Integer assessmentId;
 
-    String location;
-
-    String candidateEmail;
-
-    Integer batch;
-
+    Float score;
 
 }
