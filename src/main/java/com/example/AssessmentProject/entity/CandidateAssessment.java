@@ -29,10 +29,13 @@ public class CandidateAssessment {
     @Column(name = "created_on")
     private Date createdOn = new Date();
 
-    public CandidateAssessment(Candidate candidate, Assessment assessment) {
+    Float score;
+
+    public CandidateAssessment(Candidate candidate, Assessment assessment,Float score) {
         this.id = new CandidateAssessmentId(candidate.getCandidateId(), assessment.getAssessmentId());
         this.candidate = candidate;
         this.assessment = assessment;
+        this.score = score;
     }
 
 //Getters and setters omitted for brevity

@@ -35,7 +35,7 @@ public class CandidateAssessmentServiceImpl implements CandidateAssessmentServic
         Assessment assessment = assessmentService.getAssessmentById(assessmentId);
         if(candidate != null){
 
-            CandidateAssessment candidateAssessment= new CandidateAssessment(candidate,assessment);
+            CandidateAssessment candidateAssessment= new CandidateAssessment(candidate,assessment,candidateAssessmentDoa.getScore());
             List<CandidateAssessment> candidateAssessmentList = candidate.getAssessments();
             candidateAssessmentList.add(candidateAssessment);
             candidate.setAssessments(candidateAssessmentList);
