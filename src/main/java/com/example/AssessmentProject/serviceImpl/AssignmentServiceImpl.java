@@ -20,7 +20,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     public String addAssignment(Assignment assignment){
         Integer assessmentId=assignment.getAssessmentId();
         Assessment assessment = assessmentService.getAssessmentById(assessmentId);
-        if(assessment != null){
+        if(assessment != null && assessment.getType().equals("assignment")){
 
             assignmentRepository.save(assignment);
             return "assignment added";

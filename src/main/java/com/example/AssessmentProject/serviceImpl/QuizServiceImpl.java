@@ -24,7 +24,7 @@ public class QuizServiceImpl implements QuizService {
 
         Integer assessmentId=quiz.getAssessmentId();
         Assessment assessment = assessmentService.getAssessmentById(assessmentId);
-        if(assessment != null){
+        if(assessment != null && assessment.getType().equals("quiz")){
 
             quizRepository.save(quiz);
             return "quiz added";
