@@ -8,7 +8,7 @@ import com.example.AssessmentProject.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.util.Optional;
 
 
 @Service
@@ -31,5 +31,16 @@ public class QuizServiceImpl implements QuizService {
         }
         return "unable to add quiz";
 
+    }
+    public Quiz getQuizById(Integer quizId){
+        Optional<Assessment> assessmentOptional = assessmentRepository.findById(assessmentId);
+
+        if(assessmentOptional.isPresent())
+        {
+            return assessmentOptional.get();
+        }
+        return null;
+
+    }
     }
 }
