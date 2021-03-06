@@ -1,6 +1,7 @@
 package com.example.AssessmentProject.service;
 
 import com.example.AssessmentProject.entity.Assessment;
+import com.example.AssessmentProject.entity.TrainingMaterial;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public interface AssessmentService {
    public String deleteAssessmentById(Integer assessmentId);
 
    public Float getScoreByAssessmentId(Integer assessmentId);
+
 
 
 }

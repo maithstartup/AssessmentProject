@@ -1,6 +1,7 @@
 package com.example.AssessmentProject.serviceImpl;
 
 import com.example.AssessmentProject.entity.Assessment;
+import com.example.AssessmentProject.entity.TrainingMaterial;
 import com.example.AssessmentProject.repository.AssessmentRepository;
 import com.example.AssessmentProject.service.AssessmentService;
 import lombok.Setter;
@@ -107,6 +108,8 @@ public class AssessmentServiceImpl implements AssessmentService {
         assessmentRepository.save(assessment);
         return totalScore;
     }
+
+
 
 
 }

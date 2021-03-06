@@ -52,7 +52,7 @@ public class Candidate {
     public int hashCode() {
         return Objects.hash(candidateName);
     }
-    
+
 
     public Candidate(Integer candidateId, String candidateName, String location, String candidateEmail, Integer batch) {
         this.candidateId = candidateId;
