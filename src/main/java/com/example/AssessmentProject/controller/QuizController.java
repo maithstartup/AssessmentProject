@@ -42,37 +42,34 @@ public class QuizController {
 
     }
 
-    @GetMapping("")
-    public ResponseEntity<Object> getAllAssessment(){
-        List<Assessment> assessment = assessmentService.getAllAssessment();
-        if(assessment != null)
-            return ResponseEntity.ok().body(assessment);
+    @GetMapping("/{assessmentId}")
+    public ResponseEntity<Object> getQuizByAssessmentId(@PathVariable("assessmentId") Integer assessmentId){
+        List<Quiz> quizzes = quizService.getQuizByAssessmentId(assessmentId);
+
+        if(quizzes != null)
+            return ResponseEntity.ok().body(quizzes);
         else
-            return  ResponseEntity.badRequest().body("no assessment");
+            return  ResponseEntity.badRequest().body("no quizzes");
 
     }
 
-    @PutMapping("/id/{assessmentId}")
-    public ResponseEntity<Object> updateAssessmentById(@PathVariable("assessmentId") Integer assessmentId, @RequestBody AssessmentDao assessmentDao){
-        Assessment assessment = new Assessment(assessmentDao.getAssessmentName(), assessmentDao.getType(),assessmentDao.getScore(),assessmentDao.getDescription(), assessmentDao.getCourseId(),assessmentDao.getTrainerId());
-        Assessment assessment1 = assessmentService.updateAssessmentById(assessmentId,assessment);
-        if(assessment1 != null)
-            return ResponseEntity.ok().body(assessment1);
+    @PutMapping("/id/{quizId}")
+    public ResponseEntity<Object> updateQuizById(@PathVariable("quizId") Integer quizId, @RequestBody QuizDao quizDao){
+        Quiz quiz = new Quiz(quizDao.getAssessmentId(),quizDao.getQuestion(),quizDao.getOptionA(),quizDao.getOptionB(),quizDao.getOptionC(),quizDao.getOptionD(),quizDao.getAnswer(),quizDao.getQuizScore());
+        Quiz quiz1 = quizService.updateQuizById(quizId,quiz);
+        if(quiz != null)
+            return ResponseEntity.ok().body(quiz1);
         else
             return  ResponseEntity.badRequest().body("unable to update assessment");
     }
 
-    @DeleteMapping("/id/{assessmentId}")
-    public ResponseEntity<Object> deleteAssessmentById(@PathVariable("assessmentId") Integer assessmentId){
-        String response = assessmentService.deleteAssessmentById(assessmentId);
-
-        if(response.equals("assessment deleted"))
+    @DeleteMapping("/id/{quizId}")
+    public ResponseEntity<Object> deleteQuizById(@PathVariable("quizId") Integer quizId){
+        String response = quizService.deleteQuizById(quizId);
+        if(response.equals("quiz deleted"))
             return ResponseEntity.ok().body(response);
         else
             return  ResponseEntity.badRequest().body(response);
     }
-
-
-
 
 }

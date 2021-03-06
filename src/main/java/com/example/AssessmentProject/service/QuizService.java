@@ -10,9 +10,9 @@ public interface QuizService {
 
     public Quiz getQuizById(Integer quizId);
 
-    public List<Quiz> getQuiz(Integer assessmentID);
+    public List<Quiz> getQuizByAssessmentId(Integer assessmentID);
 
-    public Quiz updateQuizById(Integer quizId);
+    public Quiz updateQuizById(Integer quizId,Quiz quiz);
 
     public String deleteQuizById(Integer quizId);
 

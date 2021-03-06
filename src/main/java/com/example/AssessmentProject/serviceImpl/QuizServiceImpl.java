@@ -8,6 +8,8 @@ import com.example.AssessmentProject.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -33,14 +35,63 @@ public class QuizServiceImpl implements QuizService {
 
     }
     public Quiz getQuizById(Integer quizId){
-        Optional<Assessment> assessmentOptional = assessmentRepository.findById(assessmentId);
 
-        if(assessmentOptional.isPresent())
+        Optional<Quiz> quizOptional = quizRepository.findById(quizId);
+
+        if(quizOptional.isPresent())
         {
-            return assessmentOptional.get();
+            return quizOptional.get();
         }
         return null;
 
     }
+
+    public List<Quiz> getQuizByAssessmentId(Integer assessmentID){
+
+        Assessment assessment = assessmentService.getAssessmentById(assessmentID);
+
+        if(assessment != null)
+        {
+            List<Quiz> quizList = new ArrayList<>();
+            quizList.addAll(assessment.getQuizzes());
+            return quizList;
+        }
+        return null;
+
     }
+
+    public Quiz updateQuizById(Integer quizId,Quiz quiz){
+
+        Optional<Quiz> quizOptional = quizRepository.findById(quizId);
+        if(quizOptional.isPresent())
+        {
+            Quiz quiz1 = quizOptional.get();
+
+            quiz1.setAnswer(quiz.getAnswer());
+            quiz1.setQuizScore(quiz.getQuizScore());
+            quiz1.setAssessmentId(quiz.getAssessmentId());
+            quiz1.setOptionA(quiz.getOptionA());
+            quiz1.setOptionB(quiz.getOptionB());
+            quiz1.setOptionC(quiz.getOptionC());
+            quiz1.setOptionD(quiz.getOptionD());
+            quiz1.setQuizScore(quiz.getQuizScore());
+
+            quizRepository.save(quiz1);
+            return quiz1;
+
+        }
+        return null;
+    }
+
+    public String deleteQuizById(Integer quizId){
+        Optional<Quiz> quizOptional = quizRepository.findById(quizId);
+
+        if(quizOptional.isPresent())
+        {
+            quizRepository.deleteById(quizId);
+            return "quiz deleted";
+        }
+        return null;
+    }
+
 }
