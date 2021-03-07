@@ -102,7 +102,10 @@ public class AssessmentServiceImpl implements AssessmentService {
             {
                 totalScore = assessmentRepository.getAssignmentTotal(assessmentId);
             }
-
+            else if(assessment.getType().equals("project"))
+            {
+                totalScore = assessmentRepository.getProjectTotal(assessmentId);
+            }
         }
         assessment.setScore(totalScore);
         assessmentRepository.save(assessment);

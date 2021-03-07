@@ -38,7 +38,7 @@ public class QuizController {
         if(quiz != null)
             return ResponseEntity.ok().body(quiz);
         else
-            return  ResponseEntity.badRequest().body("no assessment");
+            return  ResponseEntity.badRequest().body("no quiz");
 
     }
 
@@ -57,10 +57,10 @@ public class QuizController {
     public ResponseEntity<Object> updateQuizById(@PathVariable("quizId") Integer quizId, @RequestBody QuizDao quizDao){
         Quiz quiz = new Quiz(quizDao.getAssessmentId(),quizDao.getQuestion(),quizDao.getOptionA(),quizDao.getOptionB(),quizDao.getOptionC(),quizDao.getOptionD(),quizDao.getAnswer(),quizDao.getQuizScore());
         Quiz quiz1 = quizService.updateQuizById(quizId,quiz);
-        if(quiz != null)
+        if(quiz1 != null)
             return ResponseEntity.ok().body(quiz1);
         else
-            return  ResponseEntity.badRequest().body("unable to update assessment");
+            return  ResponseEntity.badRequest().body("unable to update quiz");
     }
 
     @DeleteMapping("/id/{quizId}")

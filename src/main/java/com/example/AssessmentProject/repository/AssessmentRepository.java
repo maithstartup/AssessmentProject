@@ -12,4 +12,7 @@ public interface AssessmentRepository extends JpaRepository<Assessment,Integer> 
     @Query("SELECT SUM(q.assignmentScore) FROM Assignment q WHERE q.assessmentId = ?1  GROUP BY q.assessmentId ")
     Float getAssignmentTotal(Integer assessmentId);
 
+    @Query("SELECT SUM(q.projectScore) FROM Project q WHERE q.assessmentId = ?1  GROUP BY q.assessmentId ")
+    Float getProjectTotal(Integer assessmentId);
+
 }

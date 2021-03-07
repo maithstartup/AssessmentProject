@@ -45,6 +45,10 @@ public class Assessment {
 
     @OneToMany(cascade = CascadeType.REMOVE , fetch = FetchType.LAZY)
     @JoinColumn(name = "assessmentId")
+    Set<Project> projects;
+
+    @OneToMany(cascade = CascadeType.REMOVE , fetch = FetchType.LAZY)
+    @JoinColumn(name = "assessmentId")
     Set<TrainingMaterial> trainingMaterials;
 
     public Assessment(String assessmentName, String type, float score, String description, int courseId, int trainerId) {
