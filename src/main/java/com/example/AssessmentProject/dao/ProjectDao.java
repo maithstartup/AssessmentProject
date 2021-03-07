@@ -1,9 +1,10 @@
 package com.example.AssessmentProject.dao;
 
+
 import lombok.Getter;
 
 @Getter
-public class ProjectDoa {
+public class ProjectDao {
 
 
     Integer assessmentId;

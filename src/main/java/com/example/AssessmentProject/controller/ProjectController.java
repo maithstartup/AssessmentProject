@@ -1,10 +1,7 @@
 package com.example.AssessmentProject.controller;
 
-import com.example.AssessmentProject.dao.AssignmentDao;
-import com.example.AssessmentProject.dao.ProjectDoa;
-import com.example.AssessmentProject.entity.Assignment;
+import com.example.AssessmentProject.dao.ProjectDao;
 import com.example.AssessmentProject.entity.Project;
-import com.example.AssessmentProject.service.AssignmentService;
 import com.example.AssessmentProject.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +17,7 @@ public class ProjectController {
     ProjectService projectService;
 
     @PostMapping("")
-    public ResponseEntity<Object> addQuiz(@RequestBody ProjectDoa projectDao){
+    public ResponseEntity<Object> addQuiz(@RequestBody ProjectDao projectDao){
 
         Project project = new Project(projectDao.getAssessmentId(),projectDao.getTitle(),projectDao.getBuild(),projectDao.getProcess(),projectDao.getTesting(),projectDao.getProjectScore());
         String response = projectService.addProject(project);
@@ -53,7 +50,7 @@ public class ProjectController {
     }
 
     @PutMapping("/id/{projectId}")
-    public ResponseEntity<Object> updateProjectById(@PathVariable("projectId") Integer projectId, @RequestBody ProjectDoa projectDao){
+    public ResponseEntity<Object> updateProjectById(@PathVariable("projectId") Integer projectId, @RequestBody ProjectDao projectDao){
         Project project = new Project(projectDao.getAssessmentId(),projectDao.getTitle(),projectDao.getBuild(),projectDao.getProcess(),projectDao.getTesting(),projectDao.getProjectScore());
         Project project1 = projectService.updateProjectById(projectId,project);
         if(project1 != null)

@@ -3,7 +3,7 @@ package com.example.AssessmentProject.dao;
 import lombok.Getter;
 
 @Getter
-public class TrainingMaterialDoa {
+public class TrainingMaterialDao {
 
     Integer assessmentId;
 

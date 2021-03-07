@@ -1,17 +1,13 @@
 package com.example.AssessmentProject.controller;
 
-import com.example.AssessmentProject.dao.AssignmentDao;
-import com.example.AssessmentProject.dao.TrainingMaterialDoa;
-import com.example.AssessmentProject.entity.Assignment;
+import com.example.AssessmentProject.dao.TrainingMaterialDao;
 import com.example.AssessmentProject.entity.TrainingMaterial;
-import com.example.AssessmentProject.service.AssignmentService;
 import com.example.AssessmentProject.service.TrainingMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -22,9 +18,9 @@ public class TrainingMaterialController {
     TrainingMaterialService trainingMaterialService;
 
     @PostMapping("")
-    public ResponseEntity<Object> addTrainingMaterial(@RequestBody TrainingMaterialDoa trainingMaterialDoa){
+    public ResponseEntity<Object> addTrainingMaterial(@RequestBody TrainingMaterialDao trainingMaterialDao){
 
-        TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDoa.getAssessmentId(),trainingMaterialDoa.getTrainingMaterialType(), trainingMaterialDoa.getContent());
+        TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getAssessmentId(),trainingMaterialDao.getTrainingMaterialType(), trainingMaterialDao.getContent());
         String response = trainingMaterialService.addTrainingMaterial(trainingMaterial);
 
         if(response.equals("training material added")){
@@ -32,4 +28,44 @@ public class TrainingMaterialController {
         }
         return ResponseEntity.badRequest().body(response);
     }
+    @GetMapping("/id/{trainingMaterialId}")
+    public ResponseEntity<Object> getAssessmentById(@PathVariable("trainingMaterialId") Integer trainingMaterialId){
+        TrainingMaterial trainingMaterial = trainingMaterialService.getTrainingMaterialById(trainingMaterialId);
+        if(trainingMaterial != null)
+            return ResponseEntity.ok().body(trainingMaterial);
+        else
+            return  ResponseEntity.badRequest().body("no trainingMaterial");
+
+    }
+
+    @GetMapping("/{assessmentId}")
+    public ResponseEntity<Object> getTrainingMaterialByAssessmentId(@PathVariable("assessmentId") Integer assessmentId){
+        List<TrainingMaterial> trainingMaterials = trainingMaterialService.getTrainingMaterialByAssessmentId(assessmentId);
+
+        if(trainingMaterials != null)
+            return ResponseEntity.ok().body(trainingMaterials);
+        else
+            return  ResponseEntity.badRequest().body("no trainingMaterials");
+
+    }
+
+    @PutMapping("/id/{trainingMaterialId}")
+    public ResponseEntity<Object> updateTrainingMaterialById(@PathVariable("trainingMaterialId") Integer trainingMaterialId, @RequestBody TrainingMaterialDao trainingMaterialDao){
+        TrainingMaterial trainingMaterial = new TrainingMaterial(trainingMaterialDao.getAssessmentId(),trainingMaterialDao.getTrainingMaterialType(), trainingMaterialDao.getContent());
+        TrainingMaterial trainingMaterial1 = trainingMaterialService.updateTrainingMaterialById(trainingMaterialId,trainingMaterial);
+        if(trainingMaterial1 != null)
+            return ResponseEntity.ok().body(trainingMaterial1);
+        else
+            return  ResponseEntity.badRequest().body("unable to update trainingMaterial");
+    }
+
+    @DeleteMapping("/id/{trainingMaterialId}")
+    public ResponseEntity<Object> deleteTrainingMaterialById(@PathVariable("trainingMaterialId") Integer trainingMaterialId){
+        String response = trainingMaterialService.deleteTrainingMaterialById(trainingMaterialId);
+        if(response.equals("training material deleted"))
+            return ResponseEntity.ok().body(response);
+        else
+            return  ResponseEntity.badRequest().body(response);
+    }
+
 }
