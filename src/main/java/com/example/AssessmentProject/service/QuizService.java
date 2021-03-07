@@ -10,7 +10,7 @@ public interface QuizService {
 
     public Quiz getQuizById(Integer quizId);
 
-    public List<Quiz> getQuizByAssessmentId(Integer assessmentID);
+    public List<Quiz> getQuizByAssessmentId(Integer assessmentId);
 
     public Quiz updateQuizById(Integer quizId,Quiz quiz);
 

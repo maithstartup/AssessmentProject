@@ -11,9 +11,9 @@ public interface AssignmentService {
 
     public Assignment getAssignmentById(Integer assignmentId);
 
-    public List<Assignment> getAssignmentByAssessmentId(Integer assessmentID);
+    public List<Assignment> getAssignmentByAssessmentId(Integer assessmentId);
 
     public Assignment updateAssignmentById(Integer assignmentId,Assignment assignment);
 
-    public String deleteAssignmentById(Integer AssignmentId);
+    public String deleteAssignmentById(Integer assignmentId);
 }
