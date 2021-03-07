@@ -27,6 +27,9 @@ public class Course {
     @JoinColumn(name = "courseId")
     private Set<Assessment> assessments;
 
+    @OneToMany(mappedBy = "course")
+    Set<CandidateCourse> candidateCourses;
+
     public Course(Integer courseId, String courseDescription, Integer preReq, Integer trainerId) {
         this.courseId = courseId;
         this.courseDescription = courseDescription;
