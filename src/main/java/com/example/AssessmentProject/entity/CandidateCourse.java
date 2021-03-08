@@ -19,19 +19,20 @@ public class CandidateCourse {
         Integer candidateCourseId;
 
         @ManyToOne
-        @JoinColumn(name = "candidate_id")
+        @JoinColumn(name = "candidateId")
         Candidate candidate;
 
         @ManyToOne
-        @JoinColumn(name = "course_id")
+        @JoinColumn(name = "courseId")
         Course course;
 
         Date createdOnDay = new Date();
 
-        int grade;
+        Float score;
 
-        public CandidateCourse(Candidate candidate, Course course) {
+        public CandidateCourse(Candidate candidate, Course course,Float score) {
                 this.candidate = candidate;
                 this.course = course;
+                this.score = score;
         }
 }

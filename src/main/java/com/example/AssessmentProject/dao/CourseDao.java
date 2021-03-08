@@ -14,4 +14,6 @@ public class CourseDao {
     Integer preReq;
 
     Integer trainerId;
+
+    Float courseScore;
 }

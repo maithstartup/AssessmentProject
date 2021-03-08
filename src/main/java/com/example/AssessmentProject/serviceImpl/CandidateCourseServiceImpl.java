@@ -24,21 +24,25 @@ public class CandidateCourseServiceImpl implements CandidateCourseService {
     @Autowired
     CandidateCourseRepository candidateCourseRepository;
 
-    public String addCandidateCourse(CandidateCourseDao candidateCourseDao){
+    public String addCandidateCourse(CandidateCourseDao candidateCourseDao) {
 
         Candidate candidate = candidateService.getCandidateById(candidateCourseDao.getCandidateId());
         Course course = courseService.getCourseById(candidateCourseDao.getCourseId());
-        CandidateCourse candidateCourse = new CandidateCourse(candidate,course);
+        CandidateCourse candidateCourse = new CandidateCourse(candidate, course, candidateCourseDao.getScore());
         System.out.println(candidateCourse);
-        try {
-            candidateCourseRepository.save(candidateCourse);
+        if (candidate != null && course != null) {
+            try {
+                candidateCourseRepository.save(candidateCourse);
+                return "added";
+            } catch (Exception e) {
+                System.out.println(e);
+                return "not added";
+            }
 
-            return "added";
         }
-        catch (Exception e){
-            System.out.println(e);
-            return "not added";
-        }
+        return "not added";
+
+
 
     }
 }
