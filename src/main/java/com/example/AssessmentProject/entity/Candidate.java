@@ -1,5 +1,6 @@
 package com.example.AssessmentProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,6 +35,7 @@ public class Candidate {
     )
     private List<CandidateAssessment> assessments = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "candidate")
     Set<CandidateCourse> candidateCourses;
 
