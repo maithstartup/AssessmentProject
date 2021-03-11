@@ -12,6 +12,9 @@ import com.example.AssessmentProject.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class CandidateCourseServiceImpl implements CandidateCourseService {
 
@@ -43,6 +46,17 @@ public class CandidateCourseServiceImpl implements CandidateCourseService {
         return "not added";
 
 
+    }
+    public List<Map<String,Integer>> locationCount(Integer courseId ){
+        System.out.println("hey");
+        List<Map<String,Integer>> response= candidateCourseRepository.locationCount(5);
+        System.out.println(response.size());
+        for(Map<String,Integer> temp:response)
+        {
+            System.out.println(temp.keySet());
+            System.out.println(temp.values());
 
+        }
+        return response;
     }
 }

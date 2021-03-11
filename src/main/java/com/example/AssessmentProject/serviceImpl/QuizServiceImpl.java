@@ -68,7 +68,7 @@ public class QuizServiceImpl implements QuizService {
         if(quizOptional.isPresent())
         {
             Quiz quiz1 = quizOptional.get();
-
+            quiz1.setQuestion(quiz.getQuestion());
             quiz1.setAnswer(quiz.getAnswer());
             quiz1.setQuizScore(quiz.getQuizScore());
             quiz1.setAssessmentId(quiz.getAssessmentId());

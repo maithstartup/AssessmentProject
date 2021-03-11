@@ -4,10 +4,10 @@ import com.example.AssessmentProject.dao.CandidateCourseDao;
 import com.example.AssessmentProject.service.CandidateCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/course/score")
@@ -26,6 +26,19 @@ public class CandidateCourseController {
             return ResponseEntity.accepted().body(response);
         }
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @GetMapping("/{assessmentId}")
+    public ResponseEntity<Object> getLocationCount(@PathVariable("assessmentId") Integer assessmentId) {
+
+
+        List<Map<String, Integer>> response = candidateCourseService.locationCount(assessmentId);
+
+        if (response != null) {
+            return ResponseEntity.accepted().body(response);
+        }
+        return ResponseEntity.badRequest().body(response);
+
     }
 
 }
