@@ -17,7 +17,7 @@ public class AssignmentController {
     AssignmentService assignmentService;
 
     @PostMapping("")
-    public ResponseEntity<Object> addQuiz(@RequestBody AssignmentDao assignmentDao){
+    public ResponseEntity<Object> addAssignment(@RequestBody AssignmentDao assignmentDao){
 
         Assignment assignment = new Assignment(assignmentDao.getAssessmentId(), assignmentDao.getQuestion(), assignmentDao.getAnswer(), assignmentDao.getAssignmentScore());
         String response = assignmentService.addAssignment(assignment);
@@ -29,7 +29,7 @@ public class AssignmentController {
     }
 
     @GetMapping("/id/{assignmentId}")
-    public ResponseEntity<Object> getAssessmentById(@PathVariable("assignmentId") Integer assignmentId){
+    public ResponseEntity<Object> getAssignmentById(@PathVariable("assignmentId") Integer assignmentId){
         Assignment assignment = assignmentService.getAssignmentById(assignmentId);
         if(assignment != null)
             return ResponseEntity.ok().body(assignment);
