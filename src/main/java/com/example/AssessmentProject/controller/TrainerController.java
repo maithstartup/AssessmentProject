@@ -1,6 +1,7 @@
 package com.example.AssessmentProject.controller;
 
 import com.example.AssessmentProject.dao.TrainerDao;
+import com.example.AssessmentProject.dao.TrainerLoginDao;
 import com.example.AssessmentProject.entity.Trainer;
 import com.example.AssessmentProject.service.TrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,34 @@ public class TrainerController {
         }
         return ResponseEntity.badRequest().body("not added");
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<Object> addTrainer(@RequestBody TrainerLoginDao trainerLoginDao) {
+
+
+        Trainer trainer = trainerService.login(trainerLoginDao);
+
+        if (trainer != null) {
+            return ResponseEntity.accepted().body(trainer);
+        }
+        return ResponseEntity.badRequest().body("invalid credentials");
+    }
+
+    @PostMapping("/google")
+    public ResponseEntity<Object> googleLogin(@RequestBody TrainerLoginDao trainerLoginDao) {
+
+
+        Trainer trainer = trainerService.googleLogin(trainerLoginDao);
+
+        System.out.println(trainer);
+        if (trainer != null) {
+            return ResponseEntity.ok().body(trainer);
+        }
+        return ResponseEntity.badRequest().body("invalid credentials");
+    }
+
+
+
 
 }
 

@@ -23,7 +23,7 @@ public class CourseController {
     @PostMapping("")
     public ResponseEntity<Object> addCourse(@RequestBody CourseDao courseDao){
 
-        Course course = new Course(courseDao.getCourseId(),courseDao.getCourseDescription(),courseDao.getPreReq(),courseDao.getTrainerId());
+        Course course = new Course(courseDao.getCourseId(),courseDao.getCourseDescription(),courseDao.getPreReq(),courseDao.getTrainerId(), courseDao.getCourseScore());
         String response = courseService.addCourse(course);
 
         if(response.equals("added")){
