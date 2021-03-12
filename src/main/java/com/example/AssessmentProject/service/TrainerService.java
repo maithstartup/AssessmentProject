@@ -8,4 +8,8 @@ public interface TrainerService {
    public String addTrainer(Trainer trainer);
 
    public Trainer login(TrainerLoginDao trainerLoginDao);
+
+   public Trainer googleLogin(TrainerLoginDao trainerLoginDao);
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.AssessmentProject.controller;
 
+import com.example.AssessmentProject.dao.AssignmentDao;
 import com.example.AssessmentProject.entity.Assignment;
 import com.example.AssessmentProject.service.AssessmentService;
 import com.example.AssessmentProject.service.AssignmentService;
@@ -36,17 +37,14 @@ class AssignmentControllerTest {
     @Test
     void addAssignment() {
 
-//        Mockito.when(new Assignment(Mockito.any()))
-//                .thenReturn("assignment added");
-//        try (MockedConstruction<Assignment> mocked = mockConstruction(Assignment.class)){
-//            Assignment firstInstance = new Assignment(anyInt(),anyString(),anyString(),anyFloat());
-//        }
-//        Mockito.when(assignmentService.addAssignment(Mockito.any()))
-//                .thenReturn("assignment added");
-//
-//        ResponseEntity<Object> response = assignmentController.addAssignment(Mockito.any());
-//
-//        Assertions.assertNotNull(response);
+
+        AssignmentDao assignmentDao = new AssignmentDao();
+        Mockito.when(assignmentService.addAssignment(Mockito.any()))
+                .thenReturn("assignment added");
+
+        ResponseEntity<Object> response = assignmentController.addAssignment(assignmentDao);
+
+        Assertions.assertNotNull(response);
     }
 
     @Test
@@ -66,10 +64,6 @@ class AssignmentControllerTest {
 
         ResponseEntity<Object> response2 = assignmentController.getAssignmentById(Mockito.any());
         Assertions.assertEquals(response2,ResponseEntity.ok().body(assignment));
-
-
-
-
 
     }
 

@@ -42,6 +42,21 @@ public class TrainerController {
         return ResponseEntity.badRequest().body("invalid credentials");
     }
 
+    @PostMapping("/google")
+    public ResponseEntity<Object> googleLogin(@RequestBody TrainerLoginDao trainerLoginDao) {
+
+
+        Trainer trainer = trainerService.googleLogin(trainerLoginDao);
+
+        System.out.println(trainer);
+        if (trainer != null) {
+            return ResponseEntity.ok().body(trainer);
+        }
+        return ResponseEntity.badRequest().body("invalid credentials");
+    }
+
+
+
 
 }
 

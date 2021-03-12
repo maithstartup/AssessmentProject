@@ -39,4 +39,17 @@ public class TrainerServiceImpl implements TrainerService {
         }
         return  null;
     }
+
+    @Override
+    public Trainer googleLogin(TrainerLoginDao trainerLoginDao) {
+
+        Optional<Trainer> trainerOptional = trainerRepository.findTrainerByTrainerEmail(trainerLoginDao.getTrainerEmail());
+        if(trainerOptional.isPresent())
+        {
+            Trainer trainer = trainerOptional.get();
+            System.out.println(trainer.getTrainerId());
+                return trainer;
+        }
+        return  null;
+    }
 }

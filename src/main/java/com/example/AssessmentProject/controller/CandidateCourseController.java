@@ -28,14 +28,14 @@ public class CandidateCourseController {
         return ResponseEntity.badRequest().body(response);
     }
 
-    @GetMapping("/{assessmentId}")
+    @GetMapping("location/{assessmentId}")
     public ResponseEntity<Object> getLocationCount(@PathVariable("assessmentId") Integer assessmentId) {
 
 
-        List<Map<String, Integer>> response = candidateCourseService.locationCount(assessmentId);
+        Map<String, List<String>> response = candidateCourseService.locationCount(assessmentId);
 
         if (response != null) {
-            return ResponseEntity.accepted().body(response);
+            return ResponseEntity.ok().body(response);
         }
         return ResponseEntity.badRequest().body(response);
 

@@ -8,5 +8,5 @@ import java.util.Map;
 public interface CandidateCourseService {
     public String addCandidateCourse(CandidateCourseDao candidateCourseDao);
 
-    public List<Map<String,Integer>> locationCount(Integer courseId );
+    public Map<String, List<String>> locationCount(Integer courseId );
 }

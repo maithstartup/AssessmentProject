@@ -10,6 +10,6 @@ import java.util.Map;
 public interface CandidateCourseRepository extends JpaRepository<CandidateCourse,Integer> {
 
     @Query("SELECT c.candidate.location,COUNT(*) FROM CandidateCourse c WHERE c.course.courseId = ?1  GROUP BY c.candidate.location ")
-    List<Map<String,Integer>> locationCount(Integer courseId);
+    List<String > locationCount(Integer courseId);
 
 }

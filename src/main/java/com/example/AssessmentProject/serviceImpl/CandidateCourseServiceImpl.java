@@ -12,6 +12,8 @@ import com.example.AssessmentProject.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,16 +49,33 @@ public class CandidateCourseServiceImpl implements CandidateCourseService {
 
 
     }
-    public List<Map<String,Integer>> locationCount(Integer courseId ){
-        System.out.println("hey");
-        List<Map<String,Integer>> response= candidateCourseRepository.locationCount(5);
-        System.out.println(response.size());
-        for(Map<String,Integer> temp:response)
-        {
-            System.out.println(temp.keySet());
-            System.out.println(temp.values());
+//    public List<Map<String,Integer>> locationCount(Integer courseId ){
+//        System.out.println("hey");
+//        List<Map<String,Integer>> response= candidateCourseRepository.locationCount(5);
+//        System.out.println(response.size());
+//        for(Map<String,Integer> temp:response)
+//        {
+//            System.out.println(temp.keySet());
+//            System.out.println(temp.values());
+//
+//        }
+//        return response;
+//    }
 
+    public Map<String, List<String>> locationCount(Integer assessId ){
+        List<String> response =  candidateCourseRepository.locationCount(assessId);
+
+        Map<String, List<String>> responseMap = new HashMap<>();
+        List<String> location = new ArrayList<>();
+        List<String> count = new ArrayList<>();
+        for(String s: response){
+            String[] str = s.split(",");
+            location.add(str[0]);
+            count.add(str[1]);
         }
-        return response;
+        responseMap.put("location", location);
+        responseMap.put("count", count);
+
+        return responseMap;
     }
 }
