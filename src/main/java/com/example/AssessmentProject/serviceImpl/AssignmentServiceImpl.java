@@ -86,7 +86,7 @@ public class AssignmentServiceImpl implements AssignmentService {
             assessmentService.getScoreByAssessmentId(assignmentOptional.get().getAssessmentId());
             return "assignment deleted";
         }
-        return null;
+        return "unable to delete";
     }
 
 }

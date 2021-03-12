@@ -3,16 +3,14 @@ package com.example.AssessmentProject.controller;
 import com.example.AssessmentProject.dao.AssignmentDao;
 import com.example.AssessmentProject.entity.Assignment;
 import com.example.AssessmentProject.service.AssessmentService;
-import com.example.AssessmentProject.service.AssignmentService;
 import com.example.AssessmentProject.serviceImpl.AssignmentServiceImpl;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mockConstruction;
+
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,6 +18,9 @@ import org.mockito.MockedConstruction;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class AssignmentControllerTest {
@@ -51,6 +52,7 @@ class AssignmentControllerTest {
     void getAssignmentById() {
         Assignment assignment = new Assignment(1,"ques","ans", 0.5F);
 
+        //failure
         Mockito.when(assignmentService.getAssignmentById(Mockito.any()))
                 .thenReturn(null);
 
@@ -59,6 +61,8 @@ class AssignmentControllerTest {
 
         Assertions.assertEquals(response,ResponseEntity.badRequest().body("no assignment"));
 
+
+        //success
         Mockito.when(assignmentService.getAssignmentById(Mockito.any()))
                 .thenReturn(assignment);
 
@@ -69,13 +73,71 @@ class AssignmentControllerTest {
 
     @Test
     void getAssignmentByAssessmentId() {
+
+        Assignment assignment = new Assignment(1,"ques","ans", 0.5F);
+        List <Assignment> assignmentList = new ArrayList<>();
+        assignmentList.add(assignment);
+        // failure
+        Mockito.when(assignmentService.getAssignmentByAssessmentId(anyInt()))
+                .thenReturn(null);
+
+        ResponseEntity<Object> response = assignmentController.getAssignmentByAssessmentId(1);
+
+        Assertions.assertEquals(response,ResponseEntity.badRequest().body("no assignments"));
+
+        // success
+        Mockito.when(assignmentService.getAssignmentByAssessmentId(anyInt()))
+                .thenReturn(assignmentList);
+
+        ResponseEntity<Object> response2 = assignmentController.getAssignmentByAssessmentId(1);
+
+        Assertions.assertEquals(response2,ResponseEntity.ok().body(assignmentList));
+
     }
 
     @Test
     void updateAssignmentById() {
+
+        Assignment assignment = new Assignment(1,"ques","ans", 0.5F);
+        AssignmentDao assignmentDao = new AssignmentDao();
+        // failure
+        Mockito.when(assignmentService.updateAssignmentById(anyInt(),Mockito.any()))
+                .thenReturn(null);
+
+        ResponseEntity<Object> response = assignmentController.updateAssignmentById(1,assignmentDao);
+
+        Assertions.assertEquals(response,ResponseEntity.badRequest().body("unable to update assignment"));
+
+        // success
+
+        Mockito.when(assignmentService.updateAssignmentById(anyInt(),Mockito.any()))
+                .thenReturn(assignment);
+
+        ResponseEntity<Object> response2 = assignmentController.updateAssignmentById(1,assignmentDao);
+
+        Assertions.assertEquals(response2,ResponseEntity.ok().body(assignment));
+
     }
 
     @Test
     void deleteAssignmentById() {
+
+        // failure
+        Mockito.when(assignmentService.deleteAssignmentById(anyInt()))
+                .thenReturn("unable to delete");
+
+        ResponseEntity<Object> response = assignmentController.deleteAssignmentById(1);
+
+        Assertions.assertEquals(response,ResponseEntity.badRequest().body("unable to delete"));
+
+        // success
+
+        Mockito.when(assignmentService.deleteAssignmentById(anyInt()))
+                .thenReturn("assignment deleted");
+
+        ResponseEntity<Object> response2 = assignmentController.deleteAssignmentById(1);
+
+        Assertions.assertEquals(response2,ResponseEntity.ok().body("assignment deleted"));
+
     }
 }
